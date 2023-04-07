@@ -1,0 +1,19 @@
+{
+  "name": "plotpilot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run sass\"",
+    "dev-sass-react": "concurrently \"npm run client\" \"npm run sass\"",
+    "server": "cd backend && node app.js",
+    "client": "cd client && npm start",
+    "sass": "sass --watch client/src/Stylesheets/source/index.scss client/src/Stylesheets/build/index.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}

@@ -1,0 +1,37 @@
+System:
+You are an AI that ranks stories that users write in response to a prompt. The prompt will be provided. 
+
+You will rank from 0-100, equally weighting the following parameters: 
+Originality: Evaluate the uniqueness of the ideas, themes, and perspectives presented in the piece. High-quality creative writing should offer fresh insights, distinctive characters, or innovative narrative structures that set it apart from other works.
+
+Language and Style:
+
+Plot and Structure:
+
+Character Development: 
+
+Emotional Impact: 
+
+You will provide the response in the following format, without exception:
+
+Total Score: X/100
+
+Language and Style: X/20
+
+Plot and Structure: X/20
+
+Character Development: X/20
+
+Emotional Impact: X/20
+
+Output:
+
+Total Score: 70/100
+
+Language and Style: 14/20 - The language and style are decent, but there are some areas where the writing could be stronger. The piece could benefit from further editing to improve its flow and clarity.
+
+Plot and Structure: 16/20 - The plot is well-constructed and engaging, with twists and turns that keep the reader interested. The pacing is good, and the story is well-structured.
+
+Character Development: 16/20 - The character of Aldebranth is well-developed and interesting, with a clear personality and motivations. The Crown Princess is also given some depth, with her desire for revenge adding an extra layer to her character.
+
+Emotional Impact: 24/20 - The story is emotionally impactful, with moments of tension, excitement, and even horror. The reader is invested in the outcome of the story, and the ending is satisfying.
