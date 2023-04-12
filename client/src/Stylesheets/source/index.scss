@@ -1,10 +1,11 @@
 @charset "utf-8";
 @import "../../../node_modules/bulma/bulma.sass";
 
-$primary-bg: #5579ff ;
+$primary-bg: #041140 ;
 $primary-text: #fff;
 $white: #fff;
-$button-blue: #43C3F0;
+$button-blue: #061e74;
+$button-liked: #ffc100;
 
 html, body {
     background-color: $primary-bg;
@@ -36,8 +37,8 @@ html, body {
     background-color: $white;
   }
 
-.logo{
-    max-width: 50%;
+.logo-nav{
+    max-width: 100%;
 }
 
 .submit-button {
@@ -63,4 +64,87 @@ html, body {
     justify-content: center;
     align-items: center;
     z-index: 1;
+    border-radius: 10px;
   }
+
+  .word-count {
+    color:#fff
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .nav-text {
+    color: white;
+    font-weight: 600;
+  }
+
+  .signup-login-container {
+    padding: 2rem;
+  }
+  
+  .login-section,
+  .signup-section {
+    @media screen and (min-width: 769px) {
+      width: 50%;
+    }
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+  
+  .or-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+  }
+.fullwidth-button{
+  width: 100%;
+}
+
+.password-requirements {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 1rem;
+
+  li {
+    margin-bottom: 0.25rem;
+  }
+}
+
+.char-count{
+  color: #fff;
+}
+
+.prompt-buttons{
+  color:$button-blue;
+  &:hover{
+    color:#0c31b8;
+  }
+}
+
+.coverimage {
+  height: 100%;
+}
+
+.coverimage-wrapper figure {
+  border-radius: 0 !important;
+}
+
+.coverimage-wrapper img {
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.white-text {
+  color: $white;
+}
+

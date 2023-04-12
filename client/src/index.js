@@ -1,13 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import App from "./App.js";
+import SignUpLogin from "./Components/SignUpLogIn";
+import { Container } from "react-bulma-components";
+import SubmitPrompt from "./Components/SubmitPrompt";
+import Login from "./Components/Login";
+import Nav from "./Components/Nav";
+import About from "./Components/About";
+import { UserProvider } from "./Components/UserContext";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+      <Router>
+        <Nav />
+        <Container>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/signupLogin" element={<SignUpLogin />} />
+            <Route path="/submitPrompt" element={<SubmitPrompt />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </Container>
+      </Router>
+    </UserProvider>
   </React.StrictMode>
 );
 

@@ -10,30 +10,64 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  password  String
-  createdAt DateTime @default(now())
-  stories   Story[]
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String?
+  password     String
+  createdAt    DateTime @default(now())
+  apiKey       String?   @unique
+  stories      Story[]
+  prompts      Prompt[]
+  likedPrompts Prompt[] @relation("UserLikedPrompts")
+  likedStories Story[]  @relation("UserLikedStories")
+  favoritedPrompts Prompt[] @relation("UserFavoritedPrompts")
+
+  @@unique([name, id])
 }
 
-
-model Prompt{
-  id        Int      @id @default(autoincrement())
-  content   String   @db.Text
-  createdAt DateTime @default(now())
-  stories   Story[]
+model Prompt {
+  id            Int      @id @default(autoincrement())
+  content       String   @db.Text
+  createdAt     DateTime @default(now())
+  stories       Story[]
+  user          User     @relation(fields: [username, userId], references: [name, id])
+  username      String
+  userId        Int
+  published     Boolean  @default(false)
+  currentPrompt Boolean  @default(false)
+  likedByUsers  User[]   @relation("UserLikedPrompts")
+  favoritedByUsers User[] @relation("UserFavoritedPrompts")
+  numberLikes   Int      @default(0)
 }
 
 model Story {
-  id        Int      @id @default(autoincrement())
-  promptId  Int
-  content   String   @db.Text
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+  id           Int      @id @default(autoincrement())
+  promptId     Int
+  content      String   @db.Text
+  author       User     @relation(fields: [authorId], references: [id])
+  authorId     Int
+  createdAt    DateTime @default(now())
+  prompt       Prompt   @relation(fields: [promptId], references: [id])
+  rating       Rating[]
+  published    Boolean  @default(false)
+  public       Boolean  @default(false)
+  likedByUsers User[]   @relation("UserLikedStories")
+}
+
+model Rating {
+  id                 Int     @id @default(autoincrement())
+  storyId            Int
+  userId             Int
+  rating_plot        Int
+  rating_characters  Int
+  rating_grammar     Int
+  rating_unique      Int
+  rating_emotion     Int
+  rating_prompt      Boolean
+  rating_offensive   Boolean
+  rating_explanation String
+  story              Story   @relation(fields: [storyId], references: [id])
+
   createdAt DateTime @default(now())
-  prompt    Prompt   @relation(fields: [promptId], references: [id])
 }

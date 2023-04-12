@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { Button } from "react-bulma-components";
 import ReactQuill from "react-quill";
 import "quill/dist/quill.snow.css";
+import { Link } from "react-router-dom";
 
 function UserResponse() {
   const [value, setValue] = useState("");
-  const [wordCount, setWordCount] = useState(0);
+  const [charCount, setCharCount] = useState(0);
   const [isReadOnly, setIsReadOnly] = useState(false);
   const [adBlockEnabled, setAdBlockEnabled] = useState(false);
   const quillRef = useRef(null);
@@ -43,19 +44,14 @@ function UserResponse() {
 
   const handleChange = (content, delta, source, editor) => {
     const text = editor.getText().trim();
-    const currentWordCount = text.length ? text.split(/\s+/).length : 0;
-    if (isReadOnly) {
-      if (currentWordCount <= 1000) {
-        setValue(content);
-        setWordCount(currentWordCount);
-        setIsReadOnly(false);
-      }
+    const currentCharCount = text.length;
+    if (currentCharCount > 4000) {
+      const newText = text.slice(0, 4000);
+      setValue(newText);
+      setCharCount(4000);
     } else {
-      if (currentWordCount > 1000) {
-        setIsReadOnly(true);
-      }
       setValue(content);
-      setWordCount(currentWordCount);
+      setCharCount(currentCharCount);
     }
   };
 
@@ -65,26 +61,29 @@ function UserResponse() {
     }
   };
 
-
   return (
     <div>
-        <div className="quill-wrapper">
-      <ReactQuill
-        ref={quillRef}
-        theme="snow"
-        className={`editor-container ${adBlockEnabled ? "blurred" : ""}`}
-        value={value}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        readOnly={isReadOnly}
-      />
-      {adBlockEnabled && (
-        <div className="adblock-message">
-          Please disable your ad-blocker to use this input.
-        </div>
-      )}
+      <div className="quill-wrapper">
+        <ReactQuill
+          ref={quillRef}
+          theme="snow"
+          className={`editor-container ${adBlockEnabled ? "blurred" : ""}`}
+          value={value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          readOnly={isReadOnly}
+        />
+        {adBlockEnabled && (
+          <div className="adblock-message">
+            Please disable your ad-blocker or&nbsp;
+            <Link to="https://platform.openai.com/account/api-keys" target="_blank">
+              provide an OpenAI API key
+            </Link>
+            &nbsp;to use this input.
+          </div>
+        )}
       </div>
-      <p>Word count: {wordCount}</p>
+      <p className="char-count">Character count: {charCount}/4000</p>
       <Button className="submit-button mt-2" fullwidth={true}>
         Submit
       </Button>
