@@ -7,7 +7,7 @@ const { Input, Field, Control, Label, Checkbox } = Form;
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setUser } = useUser();
+  const { login } = useUser();
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,9 +22,8 @@ function Login() {
       const data = await response.json();
       console.log(data);
   
-      // Check if the login was successful
       if (data.token) {
-        setUser({
+        login({
           id: data.userId,
           token: data.token,
         });
@@ -36,9 +35,8 @@ function Login() {
     }
   };
   
-
   return (
-  <Columns className="signup-login-container is-vcentered is-centered">
+    <Columns className="signup-login-container is-vcentered is-centered">
       <Columns.Column className="login-section is-6" id="login">
         <Box className="login-box">
           <h2 className="is-size-4 has-text-centered">Log In</h2>
@@ -67,7 +65,8 @@ function Login() {
             </Field>
             <Field>
               <Label className="checkbox">
-              <Checkbox></Checkbox> Remember me
+              <Checkbox></Checkbox>
+              Remember me
               </Label>
             </Field>
             <Button className="fullwidth-button" type="submit">
@@ -76,7 +75,6 @@ function Login() {
           </form>
         </Box>
       </Columns.Column>
-
     </Columns>
   );
 }

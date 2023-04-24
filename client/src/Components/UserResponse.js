@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Button } from "react-bulma-components";
+import { Button, Modal } from "react-bulma-components";
 import ReactQuill from "react-quill";
 import "quill/dist/quill.snow.css";
 import { Link } from "react-router-dom";
@@ -9,6 +9,8 @@ function UserResponse() {
   const [charCount, setCharCount] = useState(0);
   const [isReadOnly, setIsReadOnly] = useState(false);
   const [adBlockEnabled, setAdBlockEnabled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const quillRef = useRef(null);
 
   useEffect(() => {
@@ -27,7 +29,6 @@ function UserResponse() {
         setAdBlockEnabled(true);
       }
     };
-
     // Run the check immediately
     checkAdblockStatus();
 
@@ -60,7 +61,27 @@ function UserResponse() {
       quillRef.current.getEditor().focus();
     }
   };
-
+  const sendContentToServer = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/moderate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content: value }),
+      });
+  
+      const responseData = await response.json();
+      console.log(responseData);
+  
+      // Handle the moderation response here (e.g., display an alert or update the UI)
+    } catch (error) {
+      console.error('Error sending content to server:', error);
+    }
+  };
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   return (
     <div>
       <div className="quill-wrapper">
@@ -76,7 +97,7 @@ function UserResponse() {
         {adBlockEnabled && (
           <div className="adblock-message">
             Please disable your ad-blocker or&nbsp;
-            <Link to="https://platform.openai.com/account/api-keys" target="_blank">
+            <Link onClick={toggleModal}>
               provide an OpenAI API key
             </Link>
             &nbsp;to use this input.
@@ -84,9 +105,14 @@ function UserResponse() {
         )}
       </div>
       <p className="char-count">Character count: {charCount}/4000</p>
-      <Button className="submit-button mt-2" fullwidth={true}>
+      <Button className="submit-button mt-2" fullwidth={true} onClick={sendContentToServer}>
         Submit
       </Button>
+      <Modal show={isModalOpen} onClose={toggleModal}>
+            <Modal.Content>
+            <p>Harum cupiditate nobis nisi. Animi non maiores dolores aut quibusdam ab. Magnam amet aliquid eos sunt quam quis aliquid. Suscipit optio exercitationem praesentium odit esse eum. Reprehenderit accusamus rerum quo doloremque consequatur. Porro corrupti fugit soluta mollitia alias odio repellat.</p>
+            </Modal.Content>
+      </Modal>
     </div>
   );
 }

@@ -7,13 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run sass\"",
     "dev-sass-react": "concurrently \"npm run client\" \"npm run sass\"",
-    "server": "cd backend && node app.js",
+    "server": "cd backend && nodemon app.js",
     "client": "cd client && npm start",
     "sass": "sass --watch client/src/Stylesheets/source/index.scss client/src/Stylesheets/build/index.css"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "compromise-numbers": "^1.4.0",
     "concurrently": "^8.0.1"
   }
 }

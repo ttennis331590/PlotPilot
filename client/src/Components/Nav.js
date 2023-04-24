@@ -11,7 +11,7 @@ function Nav() {
         </Link>
       </Columns.Column>
       <Columns.Column>
-        <Link to="/" className="nav-text">
+        <Link to="/popStories" className="nav-text">
           Popular Stories
         </Link>
       </Columns.Column>

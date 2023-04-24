@@ -28,22 +28,24 @@ async function main() {
   }
 
   // Create some prompts
-  const prompts = [];
-  for (let i = 0; i < 20; i++) {
-    const newPrompt = await prisma.prompt.create({
-      data: {
-        content: faker.lorem.paragraph(5),
-        user: {
-          connect: {
-            id: faker.helpers.arrayElement(users).id,
-          },
-        },
-        published: faker.datatype.boolean(),
-        currentPrompt: faker.datatype.boolean(),
-      },
-    });
-    prompts.push(newPrompt);
-  }
+  const prompts = [
+    "It was the first time since the outbreak that people were allowed back into the city. As the gates creaked open, an eerie silence hung in the air, and everyone knew things would never be the same.",
+    "The abandoned amusement park stood untouched for decades, until one day, an adventurous group of friends dared to step inside. As they ventured deeper, they began to uncover the park's chilling secrets.",
+    "In a world where the color of one's eyes revealed their deepest emotions, she was born with a unique condition—her eyes changed color every day, making her life an open book.",
+    "It was supposed to be a routine space mission; however, when the crew of the Orion IX discovered an uncharted planet, they faced a decision that would change the course of human history.",
+    "The old, dusty bookshop on the corner was on the verge of closing when a stranger appeared, offering a peculiar deal that would alter the shopkeeper's life forever.",
+    "In the year 2150, Earth's resources were exhausted, and humanity looked to the stars for salvation. The first wave of pioneers embarked on a perilous journey to the nearest habitable planet.",
+    "The final note of the song reverberated through the cavernous hall, and the performer vanished without a trace. As the audience searched for answers, they stumbled upon an ancient legend.",
+    "As the storm raged on outside, the inhabitants of the isolated cabin discovered a hidden door leading to a labyrinth of tunnels. Little did they know what awaited them below.",
+    "When the global network connecting human consciousness went online, the world braced for chaos. But nobody expected the rapid rise of a powerful new cult promising freedom from the system.",
+    "The old clockmaker had always been eccentric, but the townspeople never imagined the secret hidden within the intricate gears of his finest creation, a secret that would change everything.",
+    "In a time of oppressive government surveillance, an underground movement of hackers and rebels known as the 'Data Dissenters' emerged, sparking a digital war that would shape the future.",
+    "The mist-shrouded village had a dark past that was whispered about but never truly acknowledged. On the eve of the centennial, its secrets would finally come to light.",
+    "As the last known survivor of the cataclysm, she wandered the desolate wasteland, guided by a mysterious radio signal and the hope of finding others who had escaped the devastation.",
+    "A young girl with the ability to communicate with animals embarked on a quest to save her forest from the encroaching darkness, accompanied by her loyal companions and ancient magic.",
+    "The discovery of a forgotten letter tucked inside an old family heirloom unraveled a hidden history, leading to an unexpected journey through time, love, and sacrifice."
+  ];
+  
 
   // Create some stories
   const stories = [];

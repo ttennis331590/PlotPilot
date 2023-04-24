@@ -10,7 +10,10 @@ import Login from "./Components/Login";
 import Nav from "./Components/Nav";
 import About from "./Components/About";
 import { UserProvider } from "./Components/UserContext";
+import ApiKeyModal from "./Components/ApiKeyModal";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PopStories from "./Components/PopStories";
+import StoryTracker from "./Components/StoryTracker";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,6 +28,9 @@ root.render(
             <Route path="/submitPrompt" element={<SubmitPrompt />} />
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
+            <Route path="/apiKey" element={<ApiKeyModal />} />
+            <Route path="/popStories" element={<PopStories />} />
+            <Route path="/storyTracker" element={<StoryTracker />} />
           </Routes>
         </Container>
       </Router>

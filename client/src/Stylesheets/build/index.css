@@ -10422,7 +10422,92 @@ html, body {
 }
 
 .white-text {
-  color: #fff;
+  color: #fff !important;
+}
+
+.spacing {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-styling {
+  padding: 30rem 0;
+  background-color: #041140;
+  border-bottom: 4px solid #fff;
+}
+
+.file-ui-box {
+  height: 85vh !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.file-changes-content {
+  white-space: pre-wrap;
+}
+
+.file-ui-box {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+.file-ui-box::-webkit-scrollbar {
+  width: 10px;
+}
+.file-ui-box::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.file-ui-box::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 90px;
+}
+.file-ui-box::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+  border-radius: 90px;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 13vw; /* Adjust this value as needed */
+  display: inline-block; /* Add this property */
+}
+
+.table-files {
+  width: 100%;
+  max-height: 50vh; /* Ensure the table has a width set */
+}
+
+.file-column-icon {
+  width: 20%;
+}
+
+.file-column-name {
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%; /* Use percentage for the width */
+}
+
+.scroll-on-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-on-hover:hover .truncate {
+  animation: scroll-text 5s linear infinite;
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.files-panel {
+  background-color: rgb(255, 255, 255);
 }
 
 /*# sourceMappingURL=index.css.map */
