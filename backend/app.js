@@ -106,14 +106,29 @@ function mergeDuplicateNames(list) {
 
 async function processFileContent(filePath, extension) {
   let fileContent;
+
   if (extension === '.docx') {
-    const result = await mammoth.extractRawText({ path: filePath });
-    fileContent = result.value;
-    console.log("file content",fileContent);
+    const rawText = await mammoth.extractRawText({ path: filePath });
+    const htmlText = await mammoth.convertToHtml({ path: filePath });
+
+    const rawFileContent = rawText.value;
+    const htmlFileContent = htmlText.value;
+
+    fileContent = {
+      raw: rawFileContent,
+      html: htmlFileContent,
+    };
+
+    console.log("file content", fileContent);
   } else {
-    fileContent = fs.readFileSync(filePath, 'utf-8');
+    const content = fs.readFileSync(filePath, 'utf-8');
+    fileContent = {
+      raw: content,
+      html: null,
+    };
   }
-  return fileContent instanceof Buffer ? fileContent.toString() : fileContent;
+
+  return fileContent;
 }
 
 
@@ -154,7 +169,7 @@ app.post('/commit', upload.array('files'), async (req, res) => {
       // console.log("entities",entities);
       
 
-      const fileDiffs = diff.diffLines(oldFileContent, newFileContent);
+      const fileDiffs = diff.diffLines(oldFileContent.raw, newFileContent.raw);
       const diffData = fileDiffs.map((fileDiff) => ({
         added: fileDiff.added,
         removed: fileDiff.removed,
@@ -219,6 +234,21 @@ app.get('/getDiff', async (req, res) => {
 
   const diffData = JSON.parse(fs.readFileSync(diffFilePath, 'utf8'));
   res.json(diffData);
+});
+
+
+app.get("/getHtmlDoc", async (req, res) => {
+  const { username, fileName } = req.query;
+  if (!username || !fileName) {
+    return res.status(400).send('Username and fileName are required');
+  }
+  const extension = path.extname(fileName);
+  const fileNameNoExt = path.basename(fileName, extension);
+  const userDir = path.join('uploads', username);
+  filePath = path.join(userDir, fileName);
+  const htmlText = await mammoth.convertToHtml({ path: filePath });
+  console.log(htmlText.value);
+  res.json(htmlText.value);
 });
 
 app.get("/currentPrompts", async (req, res) => {

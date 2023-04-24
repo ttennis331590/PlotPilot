@@ -170,7 +170,7 @@ html, body {
 
 
 .file-ui-box  {
-  overflow-y: scroll; // Enable vertical scrolling
+  overflow-y: hidden; // Enable vertical scrolling
 
   // For WebKit-based browsers (e.g., Chrome, Safari)
   &::-webkit-scrollbar {
@@ -196,6 +196,11 @@ html, body {
   scrollbar-color: #888 #f1f1f1; // Set the thumb and track color
 
 
+}
+
+.tracked-changes-box{
+  height: 93%;
+  overflow-y: scroll;
 }
 .truncate {
   white-space: nowrap;

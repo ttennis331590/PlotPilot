@@ -8,6 +8,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run sass\"",
     "dev-sass-react": "concurrently \"npm run client\" \"npm run sass\"",
     "server": "cd backend && nodemon app.js",
+    "ml": "cd backend && python spacy_server_test.py",
     "client": "cd client && npm start",
     "sass": "sass --watch client/src/Stylesheets/source/index.scss client/src/Stylesheets/build/index.css"
   },

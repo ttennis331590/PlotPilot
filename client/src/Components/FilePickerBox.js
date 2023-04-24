@@ -4,8 +4,12 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { Box, Columns, Button, Table, Content } from 'react-bulma-components';
 
 
-function FilePickerBox({ user, userFiles, getDiff }) {
-    console.log(user);
+function FilePickerBox({ user, userFiles, setSelectedFile, selectedFile}) {
+   
+function selectFile(file){
+    setSelectedFile(file);
+    console.log(selectedFile)
+}
 
   return (
     <Box className="file-ui-box-header">
@@ -13,10 +17,10 @@ function FilePickerBox({ user, userFiles, getDiff }) {
       <Table className="table-files">
         {userFiles.map((file) => (
           <tr>
-            <td className="file-column-name">
+            <td className="file-column-name is-vcentered">
               <p
                 className="truncate scroll-on-hover"
-                onClick={() => getDiff(user.username, file)}
+                onClick={() => selectFile(file)}
               >
                 {file}
               </p>
